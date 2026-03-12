@@ -34,11 +34,11 @@ export default function ScreenshotCarousel({ screenshots }: Props) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      {/* iPhone mockup */}
+    <div className="flex flex-col items-center gap-4">
+      {/* iPhone mockup — constrained to viewport height */}
       <div className="relative">
-        <div className="iphone-frame w-[260px] sm:w-[280px]">
-          <div className="iphone-screen aspect-[9/19.5] relative bg-black">
+        <div className="iphone-frame w-[220px] sm:w-[250px] max-h-[70dvh] flex flex-col">
+          <div className="iphone-screen aspect-[9/19.5] relative bg-black max-h-[calc(70dvh-24px)]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={current}
@@ -80,17 +80,16 @@ export default function ScreenshotCarousel({ screenshots }: Props) {
         </button>
       </div>
 
-      {/* Caption */}
+      {/* Caption + Dot indicators */}
       <motion.p
         key={current}
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-sm text-muted text-center"
+        className="text-xs text-muted text-center"
       >
         {screenshots[current].caption}
       </motion.p>
 
-      {/* Dot indicators */}
       <div className="flex items-center gap-2">
         {screenshots.map((_, idx) => (
           <button

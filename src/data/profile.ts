@@ -1,8 +1,8 @@
 export const profile = {
-  name: "大野凛堂",
+  name: "Rindo Ohno",
   nameEn: "Rindo Ohno",
-  title: "モバイル / Webエンジニア",
-  bio: "AIを活用したモバイルアプリ開発を得意とするエンジニアです。Flutter・Next.jsを中心に、ユーザー体験を重視したプロダクト開発に取り組んでいます。",
+  title: "AIと一緒にプロダクトを作るエンジニア",
+  bio: "バイブコーディングで、アイデアを最速でプロダクトに変えます。AIを開発パートナーとして活用し、個人でアプリの企画から開発・ストア公開まで実現。",
   email: "ohnorindo@gmail.com",
   links: {
     github: "https://github.com/r1nd0h",

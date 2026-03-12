@@ -19,13 +19,13 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | モバイル / Webエンジニア",
+  title: "Rindo Ohno | Portfolio",
   description:
-    "Flutter・Next.jsを中心に、AIを活用したモバイルアプリ開発に取り組むエンジニアのポートフォリオサイト",
+    "バイブコーディングでアイデアを最速でプロダクトに変えるエンジニア。AIを開発パートナーとして活用し、Flutter・Next.jsでプロダクト開発。",
   openGraph: {
-    title: "Portfolio | モバイル / Webエンジニア",
+    title: "Rindo Ohno | Portfolio",
     description:
-      "Flutter・Next.jsを中心に、AIを活用したモバイルアプリ開発に取り組むエンジニアのポートフォリオサイト",
+      "バイブコーディングでアイデアを最速でプロダクトに変えるエンジニア。AIを開発パートナーとして活用し、Flutter・Next.jsでプロダクト開発。",
     type: "website",
   },
 };

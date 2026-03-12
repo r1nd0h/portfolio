@@ -14,11 +14,18 @@ export type Screenshot = {
   caption: string;
 };
 
+export type ProjectStory = {
+  problem: string;
+  solution: string;
+  result: string;
+};
+
 export type Project = {
   id: string;
   title: string;
   subtitle: string;
   description: string;
+  story?: ProjectStory;
   icon: string;
   features: string[];
   techStack: string[];

@@ -5,8 +5,15 @@ export const projects: Project[] = [
     id: "todone",
     title: "ToDone",
     subtitle: "AIが予定を組む。あなたはこなすだけ。",
-    description:
-      "AIがタスクの作成・分解・スケジューリングを支援するタスク管理アプリ。Flutterで開発し、iOS/Android両対応。Gemini AIによる自動スケジューリングやGoogleカレンダー連携など、生産性を最大化する機能を搭載。",
+    description: "",
+    story: {
+      problem:
+        "既存のタスク管理アプリはどれも痒いところに手が届かなかった。サブタスクの繰り返し設定ができない、ウィジェットが使いにくい、そして何より — 毎日自分で予定を組むのが面倒だった。",
+      solution:
+        "AIがGoogleカレンダーの予定を確認し、空き時間にタスクを自動で配置してくれるアプリを作った。話しかけるだけでタスクが作れて、1日のスケジュールはAIにおまかせ。",
+      result:
+        "バイブコーディングで約1ヶ月で開発し、App Store / Google Playに公開。企画・設計・実装・ストア申請まですべて一人で完遂。",
+    },
     icon: "/images/projects/todone/icon.png",
     features: [
       "AIチャットでタスク作成（音声入力対応）",
@@ -65,5 +72,33 @@ export const projects: Project[] = [
       },
     ],
     links: [],
+  },
+  {
+    id: "portfolio",
+    title: "Portfolio Site",
+    subtitle: "このサイト自体もバイブコーディングで。",
+    description:
+      "Next.js 15 + Tailwind CSS + Framer Motionで構築したポートフォリオサイト。デザイン・実装の全工程をClaude Codeとのバイブコーディングで完成。ダークテーマ、スクロールアニメーション、iPhoneモックアップカルーセルなど、細部にこだわったUI。",
+    icon: "",
+    features: [
+      "Framer Motionによるスクロールアニメーション",
+      "iPhoneモックアップ内スクリーンショットカルーセル",
+      "レスポンシブ対応（モバイル〜デスクトップ）",
+      "Vercelでホスティング・自動デプロイ",
+    ],
+    techStack: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Framer Motion",
+      "Vercel",
+    ],
+    screenshots: [],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/r1nd0h/portfolio",
+      },
+    ],
   },
 ];
