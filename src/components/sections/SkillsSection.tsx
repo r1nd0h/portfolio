@@ -5,6 +5,7 @@ import RevealText from "@/components/ui/RevealText";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { skillCategories } from "@/data/skills";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const skillCircles = [
   { x: "80%", y: "20%", size: 450, color: "rgba(124, 108, 240, 0.05)", speed: -0.2 },
@@ -41,8 +42,9 @@ function SkillBadge({
 }
 
 export default function SkillsSection() {
+  const isMobile = useIsMobile();
   return (
-    <section id="skills" className="snap-section relative py-28 sm:py-36 overflow-hidden">
+    <section id="skills" className="snap-section relative py-28 sm:py-36 overflow-hidden" style={isMobile ? { paddingTop: '3rem', paddingBottom: '3rem' } : {}}>
       <ParallaxCircles circles={skillCircles} />
 
       <div className="w-full px-8 sm:px-12 lg:px-16 relative">
@@ -52,11 +54,11 @@ export default function SkillsSection() {
           </p>
         </ScrollReveal>
 
-        <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-16">
+        <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-16" style={isMobile ? { marginBottom: '1.5rem' } : {}}>
           <RevealText text="Tech Stack" delay={0.1} />
         </h2>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className={isMobile ? "grid grid-cols-2 gap-3" : "grid sm:grid-cols-2 gap-6"}>
           {skillCategories.map((cat, catIdx) => (
             <ScrollReveal
               key={cat.category}
@@ -65,6 +67,7 @@ export default function SkillsSection() {
             >
               <motion.div
                 className="p-6 sm:p-7 rounded-2xl bg-card/30 border border-border hover:border-accent/20 transition-all duration-300 h-full"
+                style={isMobile ? { padding: '0.75rem' } : {}}
                 whileHover={{ scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
