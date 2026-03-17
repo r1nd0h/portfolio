@@ -6,6 +6,7 @@ import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import MagneticCard from "@/components/ui/MagneticCard";
 import { profile } from "@/data/profile";
 import { Mail, Github, Twitter, ArrowUpRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const links = [
   {
@@ -40,6 +41,7 @@ const headingLine2 = "something cool.";
 type Phase = "waiting" | "reveal" | "hold" | "settle" | "final";
 
 export default function ContactSection() {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-30%" });
   const [phase, setPhase] = useState<Phase>("waiting");
@@ -166,7 +168,7 @@ export default function ContactSection() {
         </div>
 
         {/* Contact cards */}
-        <div className="grid sm:grid-cols-3 gap-6 mt-10">
+        <div className="grid sm:grid-cols-3 gap-6 mt-10" style={isMobile ? { gap: '0.5rem' } : {}}>
           {links.map((item, idx) => (
             <motion.div
               key={item.label}
@@ -184,6 +186,7 @@ export default function ContactSection() {
                   target={item.href.startsWith("mailto") ? undefined : "_blank"}
                   rel={item.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   className="group block p-6 sm:p-8 rounded-2xl bg-card/30 border border-border hover:border-accent/30 transition-all duration-300"
+                  style={isMobile ? { padding: '0.75rem' } : {}}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <motion.div
@@ -200,7 +203,7 @@ export default function ContactSection() {
                   <p className="font-[family-name:var(--font-display)] font-semibold text-lg mb-1.5">
                     {item.label}
                   </p>
-                  <p className="text-sm text-foreground/60">{item.description}</p>
+                  <p className="text-sm text-foreground/60" style={isMobile ? { fontSize: '0.8rem' } : {}}>{item.description}</p>
                 </a>
               </MagneticCard>
             </motion.div>
