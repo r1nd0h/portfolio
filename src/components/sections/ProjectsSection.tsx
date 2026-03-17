@@ -9,8 +9,6 @@ import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import ScreenshotCarousel from "@/components/ui/ScreenshotCarousel";
 import { projects } from "@/data/projects";
 import { Code2, ArrowRight, AlertCircle, Lightbulb, Trophy, ChevronDown } from "lucide-react";
-import { useIsMobile } from "@/hooks/useIsMobile";
-
 const introCircles = [
   { x: "80%", y: "30%", size: 500, color: "rgba(124, 108, 240, 0.06)", speed: 0.2 },
   { x: "15%", y: "70%", size: 400, color: "rgba(167, 139, 250, 0.04)", speed: -0.25 },
@@ -23,7 +21,6 @@ const detailCircles = [
 ];
 
 export default function ProjectsSection() {
-  const isMobile = useIsMobile();
   const featured = projects[0];
   const detailRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -121,8 +118,8 @@ export default function ProjectsSection() {
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-accent/[0.04] blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-accent/[0.03] blur-[80px] pointer-events-none" />
 
-            <div className="relative p-8 sm:p-10 lg:p-14" style={isMobile ? { padding: '1rem' } : {}}>
-              <div className="grid lg:grid-cols-[1fr_350px] gap-8 lg:gap-14 items-start" style={isMobile ? { gap: '0.75rem' } : {}}>
+            <div className="relative p-8 sm:p-10 lg:p-14">
+              <div className="grid lg:grid-cols-[1fr_350px] gap-8 lg:gap-14 items-start">
                 {/* Left: All text content */}
                 <div className="order-2 lg:order-1">
                   <ScrollReveal>
@@ -162,7 +159,7 @@ export default function ProjectsSection() {
                     </div>
                   </ScrollReveal>
 
-                  {!isMobile && featured.story && (
+                  {featured.story && (
                     <div className="space-y-3 mb-5">
                       <ScrollReveal delay={0.1} direction="left">
                         <div className="flex gap-3">

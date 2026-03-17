@@ -5,8 +5,6 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { profile } from "@/data/profile";
 import { Zap, Brain, Rocket } from "lucide-react";
-import { useIsMobile } from "@/hooks/useIsMobile";
-
 const strengths = [
   {
     icon: Brain,
@@ -60,7 +58,6 @@ function CharReveal({ text, isActive, baseDelay }: { text: string; isActive: boo
 }
 
 export default function AboutSection() {
-  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-30%" });
   const [phase, setPhase] = useState<Phase>("waiting");
@@ -196,20 +193,7 @@ export default function AboutSection() {
           animate={showContent ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
         >
-          {isMobile ? (
-            /* Mobile: bio only, no cards (cards overflow 100dvh) */
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={showContent ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <p className="text-base text-foreground/90 leading-relaxed">
-                {profile.bio}
-              </p>
-            </motion.div>
-          ) : (
-            /* Desktop: full grid layout */
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={showContent ? { opacity: 1, y: 0 } : {}}
@@ -249,7 +233,6 @@ export default function AboutSection() {
                 ))}
               </div>
             </div>
-          )}
         </motion.div>
 
         <div className="flex-1" />

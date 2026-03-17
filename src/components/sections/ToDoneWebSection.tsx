@@ -7,8 +7,6 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { projects } from "@/data/projects";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { useIsMobile } from "@/hooks/useIsMobile";
-
 const circles = [
   { x: "85%", y: "20%", size: 420, color: "rgba(124, 108, 240, 0.05)", speed: 0.18 },
   { x: "10%", y: "70%", size: 360, color: "rgba(167, 139, 250, 0.04)", speed: -0.22 },
@@ -104,7 +102,6 @@ function WebScreenshotCarousel({ screenshots }: { screenshots: typeof projects[0
 }
 
 export default function ToDoneWebSection() {
-  const isMobile = useIsMobile();
   const project = projects.find((p) => p.id === "todone-web");
   if (!project) return null;
 
@@ -137,16 +134,14 @@ export default function ToDoneWebSection() {
               </p>
             </ScrollReveal>
 
-            {!isMobile && (
-              <ScrollReveal delay={0.2}>
-                <p className="text-lg text-foreground/70 leading-relaxed mb-8">
-                  {project.description}
-                </p>
-              </ScrollReveal>
-            )}
+            <ScrollReveal delay={0.2}>
+              <p className="text-lg text-foreground/70 leading-relaxed mb-8">
+                {project.description}
+              </p>
+            </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="flex flex-wrap gap-2 mb-8" style={isMobile ? { marginBottom: '1rem' } : {}}>
+              <div className="flex flex-wrap gap-2 mb-8">
                 {project.techStack.map((tech, i) => (
                   <motion.span
                     key={tech}
