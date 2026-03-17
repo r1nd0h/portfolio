@@ -6,6 +6,7 @@ import RevealText from "@/components/ui/RevealText";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { experiences } from "@/data/experience";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const expCircles = [
   { x: "85%", y: "40%", size: 400, color: "rgba(124, 108, 240, 0.04)", speed: 0.2 },
@@ -13,6 +14,7 @@ const expCircles = [
 ];
 
 export default function ExperienceSection() {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -22,7 +24,7 @@ export default function ExperienceSection() {
   const timelineProgress = useTransform(scrollYProgress, [0.15, 0.7], ["0%", "100%"]);
 
   return (
-    <section ref={sectionRef} id="experience" className="snap-section relative py-28 sm:py-36 overflow-hidden">
+    <section ref={sectionRef} id="experience" className="snap-section relative py-28 sm:py-36 overflow-hidden" style={isMobile ? { paddingTop: '3rem', paddingBottom: '3rem' } : {}}>
       <ParallaxCircles circles={expCircles} />
 
       <div className="w-full px-8 sm:px-12 lg:px-16 relative">
@@ -32,7 +34,7 @@ export default function ExperienceSection() {
           </p>
         </ScrollReveal>
 
-        <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-16">
+        <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-16" style={isMobile ? { marginBottom: '1.5rem' } : {}}>
           <RevealText text="Background" delay={0.1} />
         </h2>
 
@@ -45,7 +47,7 @@ export default function ExperienceSection() {
             />
           </div>
 
-          <div className="space-y-8">
+          <div className={isMobile ? "flex flex-col gap-4" : "space-y-8"}>
             {experiences.map((exp, idx) => (
               <ScrollReveal key={exp.id} delay={idx * 0.15} direction="left">
                 <div className="relative pl-10 sm:pl-14">
@@ -97,7 +99,7 @@ export default function ExperienceSection() {
         </div>
       </div>
 
-      <div className="section-divider mt-28 sm:mt-36 mx-8 sm:mx-12 lg:mx-16" />
+      <div className="section-divider mt-28 sm:mt-36 mx-8 sm:mx-12 lg:mx-16" style={isMobile ? { marginTop: '2rem' } : {}} />
     </section>
   );
 }
