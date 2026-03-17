@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { profile } from "@/data/profile";
 import { Zap, Brain, Rocket } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const strengths = [
   {
@@ -59,6 +60,7 @@ function CharReveal({ text, isActive, baseDelay }: { text: string; isActive: boo
 }
 
 export default function AboutSection() {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-30%" });
   const [phase, setPhase] = useState<Phase>("waiting");
@@ -204,18 +206,21 @@ export default function AboutSection() {
               <p className="text-lg text-foreground/90 leading-relaxed mb-4">
                 {profile.bio}
               </p>
-              <p className="text-base text-foreground/80 leading-relaxed">
-                「これ面白そう」と思ったアイデアを、AIと一緒に形にするのが好きです。
-                AIに任せるところは任せ、自分はプロダクトの方向性や
-                ユーザー体験の設計に集中する。それが自分のスタイルです。
-              </p>
+              {!isMobile && (
+                <p className="text-base text-foreground/80 leading-relaxed">
+                  「これ面白そう」と思ったアイデアを、AIと一緒に形にするのが好きです。
+                  AIに任せるところは任せ、自分はプロダクトの方向性や
+                  ユーザー体験の設計に集中する。それが自分のスタイルです。
+                </p>
+              )}
             </motion.div>
 
             {/* Right: Strength cards */}
-            <div className="space-y-4">
+            <div className={isMobile ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2" : "space-y-4"}>
               {strengths.map((item, idx) => (
                 <motion.div
                   key={item.title}
+                  className={isMobile ? "min-w-[240px] snap-center shrink-0" : ""}
                   initial={{ opacity: 0, x: 30 }}
                   animate={showContent ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
