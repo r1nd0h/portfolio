@@ -6,6 +6,7 @@ import MobileProjects from "./MobileProjects";
 import MobileAbout from "./MobileAbout";
 import MobileSkills from "./MobileSkills";
 import MobileExperience from "./MobileExperience";
+import MobileContact from "./MobileContact";
 
 export default function MobileLayout() {
   return (
@@ -17,6 +18,7 @@ export default function MobileLayout() {
         <MobileAbout />
         <MobileSkills />
         <MobileExperience />
+        <MobileContact />
       </main>
     </>
   );
