@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const circles = [
   { x: -320, y: -180, size: 8, delay: 0 },
@@ -47,6 +48,7 @@ type Phase =
   | "done";
 
 export default function LoadingScreen() {
+  const isMobile = useIsMobile();
   const [count, setCount] = useState(0);
   const [phase, setPhase] = useState<Phase>("counting");
 
@@ -111,7 +113,7 @@ export default function LoadingScreen() {
     >
       {/* Circles */}
       {circlesVisible &&
-        circles.map((circle, i) => {
+        (isMobile ? circles.slice(0, 10) : circles).map((circle, i) => {
           // Pick 4 circles to become hero background orbs
           const isOrbCandidate = i < 4;
           const isGathering = phase === "gathering";
@@ -143,7 +145,7 @@ export default function LoadingScreen() {
                         opacity: 0.15,
                         scale: 30,
                         background: "rgba(124, 108, 240, 0.3)",
-                        filter: "blur(80px)",
+                        filter: isMobile ? "blur(0px)" : "blur(80px)",
                       }
                     : {
                         // Others fade out gently
@@ -226,13 +228,13 @@ export default function LoadingScreen() {
           className="absolute rounded-full"
           style={{
             background: "rgba(124, 108, 240, 0.3)",
-            filter: "blur(60px)",
+            filter: `blur(${isMobile ? 20 : 60}px)`,
           }}
           initial={{ width: 30, height: 30, opacity: 1 }}
           animate={
             phase === "flash"
               ? { width: 80, height: 80, opacity: 1 }
-              : { width: 800, height: 800, opacity: 0 }
+              : { width: isMobile ? 400 : 800, height: isMobile ? 400 : 800, opacity: 0 }
           }
           transition={
             phase === "flash"
