@@ -2,6 +2,7 @@
 
 import Header from "@/components/layout/Header";
 import MobileHero from "./MobileHero";
+import MobileAbout from "./MobileAbout";
 
 export default function MobileLayout() {
   return (
@@ -9,6 +10,7 @@ export default function MobileLayout() {
       <Header />
       <main className="bg-background text-foreground">
         <MobileHero />
+        <MobileAbout />
       </main>
     </>
   );
