@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import ParallaxCircles from "@/components/ui/ParallaxCircles";
 import { projects } from "@/data/projects";
 import { ExternalLink } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const circles = [
   { x: "75%", y: "25%", size: 450, color: "rgba(124, 108, 240, 0.05)", speed: 0.2 },
@@ -13,6 +14,7 @@ const circles = [
 ];
 
 export default function PortfolioSection() {
+  const isMobile = useIsMobile();
   const portfolio = projects.find((p) => p.id === "portfolio");
   if (!portfolio) return null;
 
@@ -45,11 +47,13 @@ export default function PortfolioSection() {
               </p>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.2}>
-              <p className="text-lg text-foreground/70 leading-relaxed mb-8">
-                {portfolio.description}
-              </p>
-            </ScrollReveal>
+            {!isMobile && (
+              <ScrollReveal delay={0.2}>
+                <p className="text-lg text-foreground/70 leading-relaxed mb-8">
+                  {portfolio.description}
+                </p>
+              </ScrollReveal>
+            )}
 
             <ScrollReveal delay={0.3}>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -94,6 +98,7 @@ export default function PortfolioSection() {
           <ScrollReveal delay={0.2} direction="right">
             <motion.div
               className="rounded-2xl overflow-hidden border border-border bg-card/20 shadow-2xl"
+              style={isMobile ? { maxHeight: '40dvh' } : {}}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
@@ -104,6 +109,7 @@ export default function PortfolioSection() {
                 muted
                 playsInline
                 className="w-full h-auto"
+                style={isMobile ? { objectFit: 'cover' as const } : {}}
               />
             </motion.div>
           </ScrollReveal>
