@@ -1,3 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import MobileLayout from "@/components/mobile/MobileLayout";
 import Header from "@/components/layout/Header";
 import MouseGlow from "@/components/ui/MouseGlow";
 import LoadingScreen from "@/components/ui/LoadingScreen";
@@ -12,6 +17,16 @@ import ExperienceSection from "@/components/sections/ExperienceSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
+  const isMobile = useIsMobile();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+
+  if (!hydrated) return null;
+
+  if (isMobile) {
+    return <MobileLayout />;
+  }
+
   return (
     <>
       <ScrollToTop />
