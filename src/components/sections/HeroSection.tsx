@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { profile } from "@/data/profile";
 import FloatingOrbs from "@/components/ui/FloatingOrbs";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Loading total ≈ 6.2s. Hero starts during dissolve phase (at ~5.4s) for smooth overlap
 const BASE_DELAY = 5.4;
@@ -29,6 +30,7 @@ const nameChars = profile.name.split("");
 type HeroPhase = "waiting" | "name-reveal" | "name-hold" | "transition" | "final";
 
 export default function HeroSection() {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLElement>(null);
   const [phase, setPhase] = useState<HeroPhase>("waiting");
   const { scrollYProgress } = useScroll({
@@ -206,8 +208,8 @@ export default function HeroSection() {
 
         {/* Name — compact version */}
         <motion.h1
-          initial={{ opacity: 0, y: 30, filter: "blur(15px)" }}
-          animate={showContent ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          initial={{ opacity: 0, y: 30, ...(isMobile ? {} : { filter: "blur(15px)" }) }}
+          animate={showContent ? { opacity: 1, y: 0, ...(isMobile ? {} : { filter: "blur(0px)" }) } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-[family-name:var(--font-serif)] font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[-0.01em] leading-[0.95] mb-6"
         >
@@ -216,8 +218,8 @@ export default function HeroSection() {
 
         {/* Title */}
         <motion.p
-          initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : {}}
+          initial={{ opacity: 0, ...(isMobile ? {} : { filter: "blur(10px)" }) }}
+          animate={showContent ? { opacity: 1, ...(isMobile ? {} : { filter: "blur(0px)" }) } : {}}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-xl sm:text-2xl md:text-3xl text-muted font-light tracking-wide mb-4"
         >
@@ -226,8 +228,8 @@ export default function HeroSection() {
 
         {/* Bio */}
         <motion.p
-          initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : {}}
+          initial={{ opacity: 0, ...(isMobile ? {} : { filter: "blur(10px)" }) }}
+          animate={showContent ? { opacity: 1, ...(isMobile ? {} : { filter: "blur(0px)" }) } : {}}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-12"
         >
@@ -239,10 +241,10 @@ export default function HeroSection() {
           {stats.map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 30, ...(isMobile ? {} : { filter: "blur(10px)" }) }}
               animate={
                 showContent
-                  ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                  ? { opacity: 1, y: 0, ...(isMobile ? {} : { filter: "blur(0px)" }) }
                   : {}
               }
               transition={{ duration: 0.7, delay: 0.55 + i * 0.1 }}
