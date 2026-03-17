@@ -232,6 +232,7 @@ export default function HeroSection() {
           animate={showContent ? { opacity: 1, ...(isMobile ? {} : { filter: "blur(0px)" }) } : {}}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-12"
+          style={isMobile ? { marginBottom: '1.5rem' } : {}}
         >
           {profile.bio}
         </motion.p>
