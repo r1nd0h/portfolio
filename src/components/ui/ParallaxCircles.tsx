@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 type Circle = {
   x: string;
@@ -22,13 +23,14 @@ type Props = {
 };
 
 function ParallaxCircle({ circle }: { circle: Circle }) {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, circle.speed * 300]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : circle.speed * 300]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 0.8]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
@@ -42,7 +44,7 @@ function ParallaxCircle({ circle }: { circle: Circle }) {
         width: circle.size,
         height: circle.size,
         background: circle.color,
-        filter: "blur(80px)",
+        filter: isMobile ? "blur(40px)" : "blur(80px)",
         y,
         scale,
         opacity,
@@ -53,9 +55,10 @@ function ParallaxCircle({ circle }: { circle: Circle }) {
 }
 
 export default function ParallaxCircles({ circles = defaultCircles }: Props) {
+  const isMobile = useIsMobile();
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {circles.map((circle, i) => (
+      {(isMobile ? circles.slice(0, 2) : circles).map((circle, i) => (
         <ParallaxCircle key={i} circle={circle} />
       ))}
     </div>
