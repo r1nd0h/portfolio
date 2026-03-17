@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Pre-computed particle positions to avoid hydration mismatch
 const particles = [
@@ -62,6 +63,9 @@ const orbs = [
 ];
 
 export default function FloatingOrbs() {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {orbs.map((orb, i) => (

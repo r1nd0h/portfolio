@@ -74,6 +74,56 @@ export const projects: Project[] = [
     links: [],
   },
   {
+    id: "todone-web",
+    title: "ToDone Web",
+    subtitle: "モバイルアプリをWebに展開。",
+    description:
+      "Flutter製のToDoneをNext.jsでWeb版として再構築。サイドバーナビ、カレンダービュー、AIアシスタント、統計ダッシュボードなど、デスクトップに最適化したUIで同等の機能を提供。",
+    icon: "",
+    features: [
+      "AIアシスタントによるタスク作成",
+      "カレンダービューで予定を一覧",
+      "統計・レベルアップ（ゲーミフィケーション）",
+      "サイドバーナビゲーション",
+      "レスポンシブ対応",
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Gemini AI",
+    ],
+    screenshots: [
+      {
+        src: "/images/projects/todone-web/03_home.png",
+        alt: "ホーム画面",
+        caption: "Inbox & 今日のスケジュール",
+      },
+      {
+        src: "/images/projects/todone-web/04_ai.png",
+        alt: "AIアシスタント",
+        caption: "AIにタスク作成を依頼",
+      },
+      {
+        src: "/images/projects/todone-web/01_stats.png",
+        alt: "統計",
+        caption: "レベル・ストリーク・完了数",
+      },
+      {
+        src: "/images/projects/todone-web/02_calendar.png",
+        alt: "カレンダー",
+        caption: "カレンダーで予定を管理",
+      },
+    ],
+    links: [
+      {
+        label: "サイトを見る",
+        url: "https://todoweb-two.vercel.app/",
+      },
+    ],
+  },
+  {
     id: "portfolio",
     title: "Portfolio Site",
     subtitle: "このサイト自体もバイブコーディングで。",
