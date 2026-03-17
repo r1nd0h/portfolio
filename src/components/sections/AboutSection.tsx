@@ -196,51 +196,60 @@ export default function AboutSection() {
           animate={showContent ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            {/* Left: intro text */}
+          {isMobile ? (
+            /* Mobile: bio only, no cards (cards overflow 100dvh) */
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={showContent ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <p className="text-lg text-foreground/90 leading-relaxed mb-4">
+              <p className="text-base text-foreground/90 leading-relaxed">
                 {profile.bio}
               </p>
-              {!isMobile && (
+            </motion.div>
+          ) : (
+            /* Desktop: full grid layout */
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={showContent ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <p className="text-lg text-foreground/90 leading-relaxed mb-4">
+                  {profile.bio}
+                </p>
                 <p className="text-base text-foreground/80 leading-relaxed">
                   「これ面白そう」と思ったアイデアを、AIと一緒に形にするのが好きです。
                   AIに任せるところは任せ、自分はプロダクトの方向性や
                   ユーザー体験の設計に集中する。それが自分のスタイルです。
                 </p>
-              )}
-            </motion.div>
+              </motion.div>
 
-            {/* Right: Strength cards */}
-            <div className={isMobile ? "flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2" : "space-y-4"}>
-              {strengths.map((item, idx) => (
-                <motion.div
-                  key={item.title}
-                  className={isMobile ? "min-w-[240px] snap-center shrink-0" : ""}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={showContent ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                >
+              <div className="space-y-4">
+                {strengths.map((item, idx) => (
                   <motion.div
-                    whileHover={{ x: 8, scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="group p-5 sm:p-6 rounded-2xl bg-card/40 border border-border hover:border-accent/30 transition-all duration-300"
+                    key={item.title}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={showContent ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
                   >
-                    <h3 className="font-[family-name:var(--font-display)] font-bold text-xl mb-1.5">
-                      {item.title}
-                    </h3>
-                    <p className="text-base text-foreground/80 leading-relaxed">
-                      {item.description}
-                    </p>
+                    <motion.div
+                      whileHover={{ x: 8, scale: 1.01 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className="group p-5 sm:p-6 rounded-2xl bg-card/40 border border-border hover:border-accent/30 transition-all duration-300"
+                    >
+                      <h3 className="font-[family-name:var(--font-display)] font-bold text-xl mb-1.5">
+                        {item.title}
+                      </h3>
+                      <p className="text-base text-foreground/80 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </motion.div>
 
         <div className="flex-1" />
