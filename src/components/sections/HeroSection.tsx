@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { profile } from "@/data/profile";
 import FloatingOrbs from "@/components/ui/FloatingOrbs";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Loading total ≈ 6.2s. Hero starts during dissolve phase (at ~5.4s) for smooth overlap
 const BASE_DELAY = 5.4;
@@ -18,19 +17,12 @@ const PHASE = {
   CONTENT_IN: 3.2,      // Tag, title, bio, stats fade in
 };
 
-const stats = [
-  { value: "1", unit: "ヶ月", label: "でアプリ開発・公開" },
-  { value: "2", unit: "Platform", label: "iOS / Android対応" },
-  { value: "AI", unit: "Driven", label: "バイブコーディング" },
-];
-
 // Split name into characters for staggered reveal
 const nameChars = profile.name.split("");
 
 type HeroPhase = "waiting" | "name-reveal" | "name-hold" | "transition" | "final";
 
 export default function HeroSection() {
-  const isMobile = useIsMobile();
   const ref = useRef<HTMLElement>(null);
   const [phase, setPhase] = useState<HeroPhase>("waiting");
   const { scrollYProgress } = useScroll({
@@ -209,7 +201,7 @@ export default function HeroSection() {
         {/* Name — compact version */}
         <motion.h1
           initial={{ opacity: 0, y: 30, filter: "blur(15px)" }}
-          animate={showContent ? { opacity: 1, y: 0, filter: "blur(0px)" } : (isMobile ? { filter: "blur(0px)" } : {})}
+          animate={showContent ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-[family-name:var(--font-serif)] font-medium text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[-0.01em] leading-[0.95] mb-6"
         >
@@ -219,7 +211,7 @@ export default function HeroSection() {
         {/* Title */}
         <motion.p
           initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : (isMobile ? { filter: "blur(0px)" } : {})}
+          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-xl sm:text-2xl md:text-3xl text-muted font-light tracking-wide mb-4"
         >
@@ -229,40 +221,13 @@ export default function HeroSection() {
         {/* Bio */}
         <motion.p
           initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : (isMobile ? { filter: "blur(0px)" } : {})}
+          animate={showContent ? { opacity: 1, filter: "blur(0px)" } : {}}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-12"
-          style={isMobile ? { marginBottom: '1.5rem' } : {}}
+          className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed"
         >
           {profile.bio}
         </motion.p>
 
-        {/* Stats row */}
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-              animate={
-                showContent
-                  ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                  : (isMobile ? { filter: "blur(0px)" } : {})
-              }
-              transition={{ duration: 0.7, delay: 0.55 + i * 0.1 }}
-              className="stat-card px-8 py-5 rounded-2xl bg-card/60 border border-border backdrop-blur-sm"
-            >
-              <div className="flex items-baseline gap-1.5 mb-1.5">
-                <span className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl font-bold gradient-text-accent">
-                  {stat.value}
-                </span>
-                <span className="text-sm text-muted font-[family-name:var(--font-display)]">
-                  {stat.unit}
-                </span>
-              </div>
-              <p className="text-sm text-foreground/70">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
 
       {/* Scroll indicator */}
