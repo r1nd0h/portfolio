@@ -28,6 +28,9 @@ export const metadata: Metadata = {
       "バイブコーディングでアイデアを最速でプロダクトに変えるエンジニア。AIを開発パートナーとして活用し、Flutter・Next.jsでプロダクト開発。",
     type: "website",
   },
+  verification: {
+    google: "j5smSasemIDzPcTVwjbqGdUFdJMKK-WLCmMn9XENI80",
+  },
 };
 
 export default function RootLayout({
